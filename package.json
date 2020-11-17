@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
+    "lint-fix": "eslint '*/**/*.{js,ts,tsx}' --fix"
   },
   "dependencies": {
     "next": "10.0.1",
@@ -15,6 +17,29 @@
   "devDependencies": {
     "@types/node": "^14.14.7",
     "@types/react": "^16.9.56",
+    "eslint": "^7.13.0",
+    "eslint-config-xo": "^0.33.1",
+    "eslint-config-xo-react": "^0.23.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
     "typescript": "^4.0.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "xo-react"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
