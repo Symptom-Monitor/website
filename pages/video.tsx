@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useMemo} from 'react';
+import React, {useCallback, useState, useMemo, useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -7,16 +7,16 @@ import Select from '@material-ui/core/Select';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-interface IAPIResponse {
-	good?: boolean;
-	str: string;
-}
+import {IAlgorithm, IProcessResponse, useAPI} from '../lib/api';
 
 const VideoPage = () => {
+	const api = useAPI();
+
+	const [algorithms, setAlgorithms] = useState<IAlgorithm[]>([]);
+	const [algoId, setAlgoId] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [file, setFile] = useState<File | null>(null);
-	const [apiResponse, setApiResponse] = useState<IAPIResponse | null>(null);
+	const [apiResponse, setApiResponse] = useState<IProcessResponse | null>(null);
 
 	const videoURL = useMemo(() => file ? URL.createObjectURL(file) : '', [file]);
 
@@ -25,17 +25,24 @@ const VideoPage = () => {
 		setApiResponse(null);
 	};
 
-	const handleProcess = useCallback(() => {
+	const handleProcess = useCallback(async () => {
 		setLoading(true);
 
-		setTimeout(() => {
-			setLoading(false);
-			setApiResponse({
-				str: '5 people were detected',
-				good: true
-			});
-		}, 2000);
-	}, []);
+		const response = await api.processVideo(algoId);
+
+		setLoading(false);
+		setApiResponse(response);
+	}, [algoId, api]);
+
+	useEffect(() => {
+		void api.getAlgorithms().then(algos => {
+			setAlgorithms(algos);
+
+			if (algos.length > 0) {
+				setAlgoId(algos[0].id);
+			}
+		});
+	}, [api]);
 
 	return (
 		<Grid container style={{flexGrow: 1, textAlign: 'center'}} alignItems="center" spacing={4}>
@@ -75,9 +82,12 @@ const VideoPage = () => {
 
 						<Grid item>
 							<FormControl>
-								<Select native disabled={loading}>
-									<option value={0}>People detection</option>
-									<option value={1}>Blood oxygen level</option>
+								<Select native disabled={loading} value={algoId} onChange={(event: React.ChangeEvent<{ value: unknown }>) => setAlgoId(event.target.value as string)}>
+									{
+										algorithms.map(algo => (
+											<option key={algo.id} value={algo.id}>{algo.name}</option>
+										))
+									}
 								</Select>
 							</FormControl>
 						</Grid>

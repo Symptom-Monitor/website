@@ -4949,6 +4949,11 @@ klona@^2.0.3:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
+ky@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.25.0.tgz#a0f377cb2eac05f7e8f7c9c7796f2d991656a917"
+  integrity sha512-K1Rdvz2z9ihm9iasWK3iywtrOqIFdJJ09nR6PaQ5cO7NA6MIS7RhzGn9qd206FvWf5yJIZmy0Vzaz70lhU+8ow==
+
 latest-version@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-5.1.0.tgz#119dfe908fe38d15dfa43ecd13fa12ec8832face"
