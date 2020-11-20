@@ -10,6 +10,14 @@ const pages = [
 		href: '/'
 	},
 	{
+		label: 'About',
+		href: '/about'
+	},
+	{
+		label: 'App',
+		href: '/app'
+	},
+	{
 		label: 'Process a video',
 		href: '/video'
 	}
