@@ -24,8 +24,11 @@ export class API {
 		return this.client.get('algorithms').json<IAlgorithm[]>();
 	}
 
-	async processVideo(algoId: string) {
-		return this.client.post(`algorithms/${algoId}`).json<IProcessResponse>();
+	async processVideo(algoId: string, file: File) {
+		const form = new FormData();
+		form.append('file', file);
+
+		return this.client.post(`algorithms/${algoId}`, {body: form}).json<IProcessResponse>();
 	}
 }
 

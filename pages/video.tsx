@@ -26,13 +26,15 @@ const VideoPage = () => {
 	};
 
 	const handleProcess = useCallback(async () => {
-		setLoading(true);
+		if (file) {
+			setLoading(true);
 
-		const response = await api.processVideo(algoId);
+			const response = await api.processVideo(algoId, file);
 
-		setLoading(false);
-		setApiResponse(response);
-	}, [algoId, api]);
+			setLoading(false);
+			setApiResponse(response);
+		}
+	}, [algoId, api, file]);
 
 	useEffect(() => {
 		void api.getAlgorithms().then(algos => {
