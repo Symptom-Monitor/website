@@ -20,6 +20,10 @@ const pages = [
 	{
 		label: 'Process a video',
 		href: '/video'
+	},
+	{
+		label: 'Map',
+		href: '/map'
 	}
 ];
 

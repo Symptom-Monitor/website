@@ -30,6 +30,22 @@ export class API {
 
 		return this.client.post(`algorithms/${algoId}`, {body: form}).json<IProcessResponse>();
 	}
+
+	async getSimulatedSpread({x, y, alpha, beta, gamma}: {x: number; y: number; alpha: number; beta: number; gamma: number}) {
+		const response = await this.client.get('map', {
+			searchParams: {
+				x,
+				y,
+				alpha,
+				beta,
+				gamma
+			}
+		});
+
+		const blob = await response.blob();
+
+		return blob;
+	}
 }
 
 export const useAPI = () => {
