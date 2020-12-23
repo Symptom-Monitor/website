@@ -6,10 +6,6 @@ import Button from '@material-ui/core/Button';
 
 const pages = [
 	{
-		label: 'Home',
-		href: '/'
-	},
-	{
 		label: 'About',
 		href: '/about'
 	},
