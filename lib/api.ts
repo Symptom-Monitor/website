@@ -16,7 +16,7 @@ export class API {
 
 	constructor() {
 		this.client = ky.extend({
-			prefixUrl: 'http://127.0.0.1:5000'
+			prefixUrl: process.env.NEXT_PUBLIC_ENDPOINT
 		});
 	}
 

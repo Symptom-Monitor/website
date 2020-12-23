@@ -83,7 +83,7 @@ const Map = () => {
 
 				<Grid item>
 					<div className={styles.mapContainer}>
-						<img src="http://127.0.0.1:5000/static/population-density.png" id="map-input" onClick={handleMapClick}/>
+						<img src={`${process.env.NEXT_PUBLIC_ENDPOINT as string}/static/population-density.png`} id="map-input" onClick={handleMapClick}/>
 
 						<div className={styles.marker} style={{left: `${markerPosition.x * 100}%`, top: `${markerPosition.y * 100}%`}}/>
 
